@@ -1,6 +1,12 @@
 #!/bin/bash
 set -euo pipefail
 
+rm -rf tempdir
+if [ "$(docker ps -aq -f name=^samplerunning$)" ]; then
+    docker stop samplerunning
+    docker rm samplerunning
+fi
+
 mkdir tempdir
 mkdir tempdir/templates
 mkdir tempdir/static
